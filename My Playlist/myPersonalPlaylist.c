@@ -41,7 +41,7 @@ void display(struct myPlaylist *head)
 	struct myPlaylist *temp=head;
 	while(temp!=NULL)
 	{
-		printf("%s { %s, %s }\n",temp->song.songName,temp->song.singer,temp->song.genre);
+		printf("%s : %s : %s \n",temp->song.songName,temp->song.singer,temp->song.genre);
 		temp=temp->next;
 	}
 }
@@ -138,30 +138,62 @@ void playParticular(struct myPlaylist *head,struct myPlaylist **current,char *Na
 }
 void displayCurrent(struct myPlaylist *current)
 {
-	printf("\n%s { %s, %s }\n",current->song.songName,current->song.singer,current->song.genre);
+	printf("\n%s : %s : %s \n",current->song.songName,current->song.singer,current->song.genre);
+
 }
-void shuffleSong(struct myPlaylist *head,struct myPlaylist *current,int pos)
+void shuffleSong(struct myPlaylist *head,int pos1,int pos2)
 {
-	struct myPlaylist *temp=head;
+	struct myPlaylist *temp=head,*ptr;
 	int count=0;
 	char Name[50],singer[50],genre[50];
+	if(pos1==0 || pos2==0)
+	{
+		return;
+	}
 	if(head!=NULL)
 	{
 		while(temp!=NULL)
 		{
 			count++;
-			if(pos==count)
+			if(pos1<pos2)
 			{
-				strcpy(Name,current->song.songName);
-				strcpy(singer,current->song.singer);
-				strcpy(genre,current->song.genre);
-				strcpy(current->song.songName,temp->song.songName);
-				strcpy(current->song.singer,temp->song.singer);
-				strcpy(current->song.genre,temp->song.genre);
-				strcpy(temp->song.songName,Name);
-				strcpy(temp->song.singer,singer);
-				strcpy(temp->song.genre,genre);
-				break;
+				if(pos1==count)
+				{
+					ptr=temp;
+				}
+				if(pos2==count)
+				{
+					strcpy(Name,ptr->song.songName);
+					strcpy(singer,ptr->song.singer);
+					strcpy(genre,ptr->song.genre);
+					strcpy(ptr->song.songName,temp->song.songName);
+					strcpy(ptr->song.singer,temp->song.singer);
+					strcpy(ptr->song.genre,temp->song.genre);
+					strcpy(temp->song.songName,Name);
+					strcpy(temp->song.singer,singer);
+					strcpy(temp->song.genre,genre);
+					break;
+				}
+			}
+			else
+			{
+				if(pos2==count)
+				{
+					ptr=temp;
+				}
+				if(pos1==count)
+				{
+					strcpy(Name,ptr->song.songName);
+					strcpy(singer,ptr->song.singer);
+					strcpy(genre,ptr->song.genre);
+					strcpy(ptr->song.songName,temp->song.songName);
+					strcpy(ptr->song.singer,temp->song.singer);
+					strcpy(ptr->song.genre,temp->song.genre);
+					strcpy(temp->song.songName,Name);
+					strcpy(temp->song.singer,singer);
+					strcpy(temp->song.genre,genre);
+					break;
+				}
 			}
 			temp=temp->next;
 		}
@@ -169,7 +201,7 @@ void shuffleSong(struct myPlaylist *head,struct myPlaylist *current,int pos)
 }
 int main()
 {
-	int ch,pos;
+	int ch,pos1,pos2;
 	char Name[50],singer[50],genre[50];
 	struct myPlaylist *head=NULL,*current;
 	while(1)
@@ -189,12 +221,15 @@ int main()
 		switch(ch)
 		{
 			case 1:{
+				fflush(stdin);
 				printf("Enter Song: ");
-				scanf("%s",&Name);
+				fgets(Name,sizeof(Name),stdin);
+				fflush(stdin);
 				printf("Enter Singer: ");
-				scanf("%s",&singer);
+				fgets(singer,sizeof(singer),stdin);
+				fflush(stdin);
 				printf("Enter Genre: ");
-				scanf("%s",&genre);
+				fgets(genre,sizeof(genre),stdin);
 				insertSong(&head,Name,singer,genre);
 				if(flag==0)
 				{
@@ -204,8 +239,9 @@ int main()
 				break;
 			}
 			case 2:{
+				fflush(stdin);
 				printf("Enter Song: ");
-				scanf("%s",&Name);
+				fgets(Name,sizeof(Name),stdin);
 				deleteSong(&head,Name);
 				break;
 			}
@@ -224,8 +260,9 @@ int main()
 				break;
 			}
 			case 6:{
+				fflush(stdin);
 				printf("Enter Song: ");
-				scanf("%s",&Name);
+				fgets(Name,sizeof(Name),stdin);
 				playParticular(head,&current,Name);
 				displayCurrent(current);
 				break;
@@ -236,9 +273,9 @@ int main()
 				break;
 			}
 			case 8:{
-				printf("Enter Position: ");
-				scanf("%d",&pos);
-				shuffleSong(head,current,pos);
+				printf("Enter Positions: ");
+				scanf("%d %d",&pos1,&pos2);
+				shuffleSong(head,pos1,pos2);
 				break;
 			}
 			case 9:{

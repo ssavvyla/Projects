@@ -150,6 +150,9 @@ int main()
 		{
 			printf("\n\nPlayer 1: [\'O\']\n\n");
 			player_Input('O');
+			system("cls");
+			welcome();
+			cells();
 			updateCells();
 			turn++;
 			p1=1;
@@ -159,6 +162,9 @@ int main()
 		{
 			printf("\n\nPlayer 2: [\'X\']\n\n");
 			player_Input('X');
+			system("cls");
+			welcome();
+			cells();
 			updateCells();
 			turn++;
 			p2=1;
@@ -178,6 +184,9 @@ int main()
 			{
 				printf("\n\nPlayer 2: [\'X\']\n\n");
 				player_Input('X');
+				system("cls");
+				welcome();
+				cells();
 				updateCells();
 				turn++;
 				p2=1;
@@ -189,6 +198,9 @@ int main()
 			{
 				printf("\n\nPlayer 1: [\'O\']\n\n");
 				player_Input('O');
+				system("cls");
+				welcome();
+				cells();
 				updateCells();
 				turn++;
 				p1=1;
