@@ -239,10 +239,13 @@ int main()
 				break;
 			}
 			case 2:{
-				fflush(stdin);
-				printf("Enter Song: ");
-				fgets(Name,sizeof(Name),stdin);
-				deleteSong(&head,Name);
+				if(head!=NULL)
+				{
+					fflush(stdin);
+					printf("Enter Song: ");
+					fgets(Name,sizeof(Name),stdin);
+					deleteSong(&head,Name);
+				}
 				break;
 			}
 			case 3:{
@@ -250,26 +253,38 @@ int main()
 				break;
 			}
 			case 4:{
-				playNext(&current,head);
-				displayCurrent(current);
+				if(head!=NULL)
+				{
+					playNext(&current,head);
+					displayCurrent(current);
+				}
 				break;
 			}
 			case 5:{
-				playPrev(&current);
-				displayCurrent(current);
+				if(head!=NULL)
+				{
+					playPrev(&current);
+					displayCurrent(current);
+				}
 				break;
 			}
 			case 6:{
-				fflush(stdin);
-				printf("Enter Song: ");
-				fgets(Name,sizeof(Name),stdin);
-				playParticular(head,&current,Name);
-				displayCurrent(current);
+				if(head!=NULL)
+				{
+					fflush(stdin);
+					printf("Enter Song: ");
+					fgets(Name,sizeof(Name),stdin);
+					playParticular(head,&current,Name);
+					displayCurrent(current);
+				}
 				break;
 			}
 			case 7:{
-				playFirst(&current,head);
-				displayCurrent(current);
+				if(head!=NULL)
+				{
+					playFirst(&current,head);
+					displayCurrent(current);
+				}				
 				break;
 			}
 			case 8:{
