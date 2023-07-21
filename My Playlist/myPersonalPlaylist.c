@@ -250,8 +250,14 @@ int main()
 	int ch,pos1,pos2;
 	char Name[50],singer[50],genre[50];
 	struct myPlaylist *head=NULL,*current;
+	fflush(stdin);
 	printf("\nPress 1 to loop and 0 otherwise: ");
 	scanf("%d",&loop);
+	if(loop!=0 || loop!=1 || isalpha(loop))
+	{
+		system("cls");
+		main();
+	}
 	while(1)
 	{
 		system("cls");
