@@ -301,12 +301,10 @@ int main()
 					{
 						printf("\nEmpty Playlist\n");						
 					}
-					getch();
 					break;
 				}
 				case 3:{
 					display(head);
-					getch();
 					break;
 				}
 				case 4:{
@@ -322,7 +320,6 @@ int main()
 					{
 						printf("\nEmpty Playlist\n");
 					}
-					getch();
 					break;
 				}
 				case 5:{
@@ -338,7 +335,6 @@ int main()
 					{
 						printf("\nEmpty Playlist\n");
 					}
-					getch();
 					break;
 				}
 				case 6:{
@@ -353,7 +349,6 @@ int main()
 					{
 						printf("\nEmpty Playlist\n");
 					}
-					getch();
 					break;
 				}
 				case 7:{
@@ -365,8 +360,7 @@ int main()
 					else
 					{
 						printf("\nEmpty Playlist\n");
-					}
-					getch();				
+					}			
 					break;
 				}
 				case 8:{
@@ -379,8 +373,7 @@ int main()
 					else
 					{
 						printf("\nEmpty Playlist\n");
-					}
-					getch();	
+					}	
 					break;
 				}
 				case 9:{
@@ -392,8 +385,8 @@ int main()
 		else
 		{
 			printf("\nEnter a Number between 1-9\n");
-			getch();
 		}
+		getch();
 	}
 	return 0;
 }
