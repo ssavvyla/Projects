@@ -249,150 +249,153 @@ int main()
 {
 	int ch,pos1,pos2;
 	char Name[50],singer[50],genre[50];
-	struct myPlaylist *head=NULL,*current;
-	fflush(stdin);
+	struct myPlaylist *head=NULL,*current;	
 	printf("\nPress 1 to loop and 0 otherwise: ");
+	fflush(stdin);
 	scanf("%d",&loop);
-	if(loop!=0 || loop!=1 || isalpha(loop))
+	if(loop==0 || loop==1)
+	{
+		while(1)
+		{
+			system("cls");
+			printf("\n1) Insert a New Song.\n");
+			printf("2) Delete a Song.\n");
+			printf("3) Display all Songs.\n");
+			printf("4) Play Next Song.\n");
+			printf("5) Play Previous Song.\n");
+			printf("6) Play Particular Song.\n");
+			printf("7) Play First Song.\n");
+			printf("8) Shuffle Any Song.\n");
+			printf("9) Quit.\n\n");
+			printf("Enter your choice: ");
+			fflush(stdin);
+			scanf("%d",&ch);		
+			if(ch>0 && ch<10)
+			{
+				switch(ch)
+				{
+					case 1:{
+						fflush(stdin);
+						printf("\nEnter Song: ");
+						fgets(Name,sizeof(Name),stdin);
+						fflush(stdin);
+						printf("Enter Singer: ");
+						fgets(singer,sizeof(singer),stdin);
+						fflush(stdin);
+						printf("Enter Genre: ");
+						fgets(genre,sizeof(genre),stdin);
+						insertSong(&head,Name,singer,genre);
+						if(flag==0)
+						{
+							current=head;
+							flag=1;
+						}
+						break;
+					}
+					case 2:{
+						if(head!=NULL)
+						{
+							fflush(stdin);
+							printf("\nEnter Song: ");
+							fgets(Name,sizeof(Name),stdin);
+							deleteSong(&head,Name);
+						}
+						else
+						{
+							printf("\nEmpty Playlist\n");						
+						}
+						break;
+					}
+					case 3:{
+						display(head);
+						break;
+					}
+					case 4:{
+						if(head!=NULL)
+						{
+							playNext(&current,head);
+							if(current->next!=NULL || loop==1)
+							{
+								displayCurrent(current);
+							}
+						}
+						else
+						{
+							printf("\nEmpty Playlist\n");
+						}
+						break;
+					}
+					case 5:{
+						if(head!=NULL)
+						{
+							playPrev(&current);
+							if(current->prev!=NULL || loop==1)
+							{
+								displayCurrent(current);
+							}
+						}
+						else
+						{
+							printf("\nEmpty Playlist\n");
+						}
+						break;
+					}
+					case 6:{
+						if(head!=NULL)
+						{
+							fflush(stdin);
+							printf("\nEnter Song: ");
+							fgets(Name,sizeof(Name),stdin);
+							playParticular(head,&current,Name);
+						}
+						else
+						{
+							printf("\nEmpty Playlist\n");
+						}
+						break;
+					}
+					case 7:{
+						if(head!=NULL)
+						{
+							playFirst(&current,head);
+							displayCurrent(current);
+						}
+						else
+						{
+							printf("\nEmpty Playlist\n");
+						}			
+						break;
+					}
+					case 8:{
+						if(head!=NULL)
+						{
+							printf("\nEnter Positions: ");
+							scanf("%d %d",&pos1,&pos2);
+							shuffleSong(head,pos1,pos2);
+						}
+						else
+						{
+							printf("\nEmpty Playlist\n");
+						}	
+						break;
+					}
+					case 9:{
+						exit(0);
+						break;
+					}
+				}
+			}
+			else
+			{
+				printf("\nEnter a Number between 1-9\n");
+			}
+			getch();
+		}
+	}
+	else
 	{
 		system("cls");
 		main();
-	}
-	while(1)
-	{
-		system("cls");
-		printf("\n1) Insert a New Song.\n");
-		printf("2) Delete a Song.\n");
-		printf("3) Display all Songs.\n");
-		printf("4) Play Next Song.\n");
-		printf("5) Play Previous Song.\n");
-		printf("6) Play Particular Song.\n");
-		printf("7) Play First Song.\n");
-		printf("8) Shuffle Any Song.\n");
-		printf("9) Quit.\n\n");
-		printf("Enter your choice: ");
-		fflush(stdin);
-		scanf("%d",&ch);		
-		if(ch>0 && ch<10)
-		{
-			switch(ch)
-			{
-				case 1:{
-					fflush(stdin);
-					printf("\nEnter Song: ");
-					fgets(Name,sizeof(Name),stdin);
-					fflush(stdin);
-					printf("Enter Singer: ");
-					fgets(singer,sizeof(singer),stdin);
-					fflush(stdin);
-					printf("Enter Genre: ");
-					fgets(genre,sizeof(genre),stdin);
-					insertSong(&head,Name,singer,genre);
-					if(flag==0)
-					{
-						current=head;
-						flag=1;
-					}
-					break;
-				}
-				case 2:{
-					if(head!=NULL)
-					{
-						fflush(stdin);
-						printf("\nEnter Song: ");
-						fgets(Name,sizeof(Name),stdin);
-						deleteSong(&head,Name);
-					}
-					else
-					{
-						printf("\nEmpty Playlist\n");						
-					}
-					break;
-				}
-				case 3:{
-					display(head);
-					break;
-				}
-				case 4:{
-					if(head!=NULL)
-					{
-						playNext(&current,head);
-						if(current->next!=NULL || loop==1)
-						{
-							displayCurrent(current);
-						}
-					}
-					else
-					{
-						printf("\nEmpty Playlist\n");
-					}
-					break;
-				}
-				case 5:{
-					if(head!=NULL)
-					{
-						playPrev(&current);
-						if(current->prev!=NULL || loop==1)
-						{
-							displayCurrent(current);
-						}
-					}
-					else
-					{
-						printf("\nEmpty Playlist\n");
-					}
-					break;
-				}
-				case 6:{
-					if(head!=NULL)
-					{
-						fflush(stdin);
-						printf("\nEnter Song: ");
-						fgets(Name,sizeof(Name),stdin);
-						playParticular(head,&current,Name);
-					}
-					else
-					{
-						printf("\nEmpty Playlist\n");
-					}
-					break;
-				}
-				case 7:{
-					if(head!=NULL)
-					{
-						playFirst(&current,head);
-						displayCurrent(current);
-					}
-					else
-					{
-						printf("\nEmpty Playlist\n");
-					}			
-					break;
-				}
-				case 8:{
-					if(head!=NULL)
-					{
-						printf("\nEnter Positions: ");
-						scanf("%d %d",&pos1,&pos2);
-						shuffleSong(head,pos1,pos2);
-					}
-					else
-					{
-						printf("\nEmpty Playlist\n");
-					}	
-					break;
-				}
-				case 9:{
-					exit(0);
-					break;
-				}
-			}
-		}
-		else
-		{
-			printf("\nEnter a Number between 1-9\n");
-		}
-		getch();
 	}
 	return 0;
 }
