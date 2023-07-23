@@ -202,27 +202,11 @@ int main()
 	{
 		if(tossF())
 		{
-			printf("\n\nPlayer 1: [\'%c\'] : %s \n\n",player1.mark,player1.name);
-			player_Input(player1.mark);
-			system("cls");
-			welcome();
-			cells();
-			updateCells();
-			turn++;
 			p1=1;
-			up=player1.mark;
 		}
 		else
 		{
-			printf("\n\nPlayer 2: [\'%c\'] : %s \n\n",player2.mark,player2.name);
-			player_Input(player2.mark);
-			system("cls");
-			welcome();
-			cells();
-			updateCells();
-			turn++;
 			p2=1;
-			up=player2.mark;
 		}
 		while(turn!=9)
 		{
@@ -236,6 +220,20 @@ int main()
 			}
 			if(p1)
 			{
+                printf("\n\nPlayer 1: [\'%c\'] : %s \n\n",player1.mark,player1.name);
+				player_Input(player1.mark);
+				system("cls");
+				welcome();
+				cells();
+				updateCells();
+				turn++;
+				p1=0;
+				p2=1;
+				up=player1.mark;
+				continue;				
+			}
+			if(p2)
+			{
 				printf("\n\nPlayer 2: [\'%c\'] : %s \n\n",player2.mark,player2.name);
 				player_Input(player2.mark);
 				system("cls");
@@ -243,23 +241,9 @@ int main()
 				cells();
 				updateCells();
 				turn++;
-				p2=1;
-				p1=0;
-				up=player2.mark;
-				continue;
-			}
-			if(p2)
-			{
-				printf("\n\nPlayer 1: [\'%c\'] : %s \n\n",player1.mark,player1.name);
-				player_Input(player1.mark);
-				system("cls");
-				welcome();
-				cells();
-				updateCells();
-				turn++;
-				p1=1;
 				p2=0;
-				up=player1.mark;
+				p1=1;
+				up=player2.mark;
 				continue;
 			}
 		}
