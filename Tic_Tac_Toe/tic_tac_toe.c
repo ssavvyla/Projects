@@ -263,6 +263,10 @@ int main()
 				continue;
 			}
 		}
+		if(turn==9)
+		{
+			win=winner_Selection(up);
+		}
 		if(win==0)
 		{
 			printf("\n\nDRAW\n\n");
