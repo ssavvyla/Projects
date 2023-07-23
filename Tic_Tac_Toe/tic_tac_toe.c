@@ -220,7 +220,7 @@ int main()
 			}
 			if(p1)
 			{
-                printf("\n\nPlayer 1: [\'%c\'] : %s \n\n",player1.mark,player1.name);
+				printf("\n\nPlayer 1: [\'%c\'] : %s \n\n",player1.mark,player1.name);
 				player_Input(player1.mark);
 				system("cls");
 				welcome();
