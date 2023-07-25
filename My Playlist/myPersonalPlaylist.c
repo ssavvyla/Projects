@@ -3,7 +3,7 @@
 #include<string.h>
 #include<ctype.h>
 int flag=0;
-int loop;
+char loop='\0';
 struct Song{
 	char songName[50];
 	char singer[50];
@@ -60,7 +60,7 @@ void playPrev(struct myPlaylist **current)
 	}
 	else
 	{
-		if(loop==1)
+		if(loop==49)
 		{
 			while(temp->next!=NULL)
 			temp=temp->next;
@@ -75,11 +75,11 @@ void playPrev(struct myPlaylist **current)
 void playNext(struct myPlaylist **current,struct myPlaylist *head)
 {
 	struct myPlaylist *temp=*current;
-	if(loop==1 && temp->next==NULL)
+	if(loop==49 && temp->next==NULL)
 	{
 		*current=head;
 	}
-	else if(loop==0 && temp->next==NULL)
+	else if(loop==48 && temp->next==NULL)
 	{
 		printf("\nEnd of Playlist\n");
 		return;
@@ -252,8 +252,8 @@ int main()
 	struct myPlaylist *head=NULL,*current;	
 	printf("\nPress 1 to loop and 0 otherwise: ");
 	fflush(stdin);
-	scanf("%d",&loop);
-	if(loop==0 || loop==1)
+	scanf("%c",&loop);
+	if(loop==48 || loop==49)
 	{
 		while(1)
 		{
@@ -314,7 +314,7 @@ int main()
 						if(head!=NULL)
 						{
 							playNext(&current,head);
-							if(current->next!=NULL || loop==1)
+							if(current!=NULL || loop==49)
 							{
 								displayCurrent(current);
 							}
@@ -329,7 +329,7 @@ int main()
 						if(head!=NULL)
 						{
 							playPrev(&current);
-							if(current->prev!=NULL || loop==1)
+							if(current!=NULL || loop==49)
 							{
 								displayCurrent(current);
 							}
